@@ -21,8 +21,13 @@
         <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
         <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
         <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>
-      </div>
+       <!--Muestro nombre del usurio en la esquina superior derecha-->
+        <p id="userCont" class="py-2 d-none d-md-inline-block text-white" href="#"></p>
+        <script>document.getElementById("userCont").innerHTML = localStorage.getItem('username')</script>
+    </div>
     </nav>
+
+
       <main role="main" class="pb-5">
       <div class="text-center p-4">
           <h2>Productos</h2>
@@ -31,10 +36,62 @@
       <div class="container">
           <div class="row">
               <div class="col text-right">
-          <div class="row">
-              <div class="list-group" id="product-list-container">
-              </div>
+            <!-- Botones según criterio de filtrado -->
+            <div class="btn-group btn-group-toggle mb-4" data-toggle="buttons">
+              <label class="btn btn-light active" id="sortAsc">
+                <input type="radio" name="options" autocomplete="off">Menor precio
+              </label>
+              <label class="btn btn-light" id="sortDesc">
+                <input type="radio" name="options" autocomplete="off">Mayor precio
+              </label>
+              <label class="btn btn-light" id="sortBySoldCount">
+                <input type="radio" name="options" autocomplete="off">Más vendidos
+              </label>
+            </div>
           </div>
+        </div>
+        <!-- Recuadro de buscar productos (desafiate)-->
+        <div class="row justify-content-end">
+          <div class="col-md-6">
+            <div class="input-group">
+              <div class="form-outline">
+                <input type="search" id="buscador" class="form-control" placeholder="Buscar"/>
+              </div>
+              <div class="col-1 p-0">
+              <button type="button" class="btn btn-light btn-block">
+                <i class="fas fa-search"></i> <!--lupa del costado del recuadro para escribir-->
+              </button>
+            </div>
+            </div>
+          </div>
+          <!--Acá el la palabra precio para el rango y el limpiar y filtrar-->
+          <div class="col-md-6 col-sm-12 mb-1 container">
+            <div class="row container p-0 m-0">
+              <div class="col">
+                <p class="font-weight-normal text-right my-2">Precio</p>
+              </div>
+              <div class="col">
+                <input class="form-control" type="number" placeholder="min." id="rangeFilterCostMin">
+              </div>
+              <div class="col">
+                <input class="form-control" type="number" placeholder="máx." id="rangeFilterCostMax">
+              </div>
+              <div class="col-3 p-0">
+                <div class="btn-group" role="group">
+                  <button class="btn btn-light btn-block" id="btnFiltro">Filtrar</button>
+                  <button class="btn btn-link btn-sm" id="clearRangeFilter">Limpiar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container">
+        <div class="row">
+          <div class="col text-right"></div>
+            <div class="list-group" id="productos-list-container">
+            </div>
+          </div>
+       </div>
       </div>
   </main>
 
