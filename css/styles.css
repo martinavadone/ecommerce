@@ -193,3 +193,7 @@ body {
  h1 {
   font-family: 'Raleway';
  }
+
+ .checked {
+   color: orange;
+ }
