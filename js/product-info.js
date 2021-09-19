@@ -1,11 +1,11 @@
-let comments =[];
+let listacomments =[];
 
 
 document.addEventListener("DOMContentLoaded", function(e){
 
 showProducts();
 showComments();
-showComment();
+
 
 }
 )
@@ -38,7 +38,7 @@ function showImagesGallery(array){
 //Guardar fecha y hora.
 function getDate(){
   let date = new Date();
-  let formatDate = date.getDate().toString().padStart(2,'0') + "/" + (date.getMonth() + 1).toString().padStart(2,'0') + "/" + date.getFullYear().toString() + "  " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+  let formatDate = date.getDate().toString().padStart(2,'0') + "/" + (date.getMonth() + 1).toString().padStart(2,'0') + "/" + date.getFullYear().toString() + "  " + date.getHours().toString().padStart(2,'0') + ":" + date.getMinutes().toString().padStart(2,'0') + ":" + date.getSeconds().toString().padStart(2,'0');
 return formatDate;
 }
 
@@ -66,7 +66,7 @@ function saveComment(){
     score: document.getElementById("score").value,
     user: localStorage.getItem("username")
   }
-  comments.push(comentario);
+  listacomments.push(comentario);
   showComment();
 }
 
@@ -74,14 +74,12 @@ function saveComment(){
 //Mostrar comentarios que se hagan.
 function showComment(){
   let opinion = ""
-  for (let i = comments.length - 1; i >= 0; i--) {
-    let comment = comments[i];
-    opinion += `<div class= "bd-example"> 
-           <dl>
-              <dt>${comment.user} - ${comment.dateTime} - ${drawStars(comment.score)}</dt>
-              <dd>${comment.description}</dd>
-            </dl>
-            </div>`
+  for (let i = listacomments.length - 1; i >= 0; i--) {
+    let comment = listacomments[i];
+    opinion += 
+          `<div class="comment-card container"><h4>${comment.user} ${drawStars(comment.score)}</h4>
+              <p>${comment.description}<p class="text-right">${comment.dateTime}</p></p>
+              </div><br>`
   }
   document.getElementById("comentarios").innerHTML = opinion;
 }
@@ -108,11 +106,13 @@ function showComments() {
           }
         }
         
-        comentarios.innerHTML +=
+        comentariosJSON.innerHTML +=
           `<div class="comment-card container"><h4>${comments.user} ${saveStar}</h4>
               <p>${comments.description}<p class="text-right">${comments.dateTime}</p></p>
               </div><br>`
+           
       }})
+      showComment();
     }
     
 
