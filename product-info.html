@@ -24,11 +24,20 @@
       <a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a>
       <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
       <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
-      <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>
+     
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        ¡Bienvenid@, ${sessionStorage.getItem('username')}!
+        </button>
+        <script>document.getElementById("dropdownMenuButton").innerHTML = localStorage.getItem('username')</script>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="cart.html">Ver carrito</a>
+            <a class="dropdown-item" href="my-profile.html">Mi perfil</a>
+            <a class="dropdown-item" href="index.html">Cerrar sesión</a>
+        </div>
+        </div>
 
-      <!--Muestro nombre del usurio en la esquina superior derecha-->
-      <p id="userCont" class="py-2 d-none d-md-inline-block text-white" href="#"></p>
-      <script>document.getElementById("userCont").innerHTML = localStorage.getItem('username')</script>
+        
     </div>
   </nav>
   <main role="main">
@@ -67,6 +76,15 @@
       <br>
     </div>
 
+
+    <!-- Productos relacionados -->
+    <h1 style="text-align: center;">Productos Relacionados</h1><hr>
+    <div  class="container-fluid d-flex justify-content-center">
+      <div class="row mt-5" id="relatedProd"></div>
+    </div><br>
+    <hr>
+
+    
 <!--Parte de comentarios.-->
     <div class="container">
       <h2 class="comment-card container">Comentarios</h2>

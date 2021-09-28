@@ -2,10 +2,9 @@ let listacomments =[];
 
 
 document.addEventListener("DOMContentLoaded", function(e){
-
 showProducts();
 showComments();
-
+showRelacionados();
 
 }
 )
@@ -140,5 +139,31 @@ function showProducts(){
         //Muestro las imagenes en forma de galería.
         showImagesGallery(product.images);
     }
-});
-}
+     
+
+    function showRelacionados(){
+      getJSONData(PRODUCT_INFO_URL).then(function(resultObj){
+        if (resultObj.status === "ok")
+        {let prodRel = ``;
+        for (let i = 0; i < resultObj.relatedProducts.length; i++) {
+            prodRel += `
+            <div class="col-sm-4">
+                    <div class="card">
+                        <a class="card-link" href="#">
+                            <img class="card-img-top" src="${prods[info.relatedProducts[i]].imgSrc}" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">${`prods`[info.relatedProducts[i]].name}</h5>
+                                <p class="card-text">${prods[info.relatedProducts[i]].description}</p>
+                                <p class="card-text">${prods[info.relatedProducts[i]].currency} ${prods[info.relatedProducts[i]].cost}</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            `
+        }
+
+
+        }
+    })
+    
+  }})}
