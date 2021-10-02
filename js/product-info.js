@@ -1,15 +1,45 @@
 let listacomments =[];
+var listadeProductos = [];
+var product = {};
 
 
 document.addEventListener("DOMContentLoaded", function(e){
-showProducts();
-showComments();
-showRelacionados();
 
+  //Petición para poder usar la función de mostrar relacionados dentro de la de mostrar productos.
+  getJSONData(PRODUCTS_URL).then(respuesta1 =>{ 
+    if (respuesta1.status === "ok") {
+      listadeProductos = respuesta1.data;
+      mostrarProductos();
+    }
+  })
+  showComments();
+})
+
+  //Muestro la información del producto con sus relacionados.
+function mostrarProductos(){
+  getJSONData(PRODUCT_INFO_URL).then(function(resultObj){
+    if (resultObj.status === "ok")
+    {
+        product = resultObj.data;
+
+        let productNameHTML  = document.getElementById("productName");
+        let productDescriptionHTML = document.getElementById("productDescription");
+        let productCountHTML = document.getElementById("productCount");
+        let productCostHTML = document.getElementById("productCost");
+    
+        productNameHTML.innerHTML = product.name;
+        productDescriptionHTML.innerHTML = product.description;
+        productCountHTML.innerHTML = product.soldCount;
+        productCostHTML.innerHTML = product.cost;
+
+        //Muestro las imagenes en forma de galería.
+        showImagesGallery(product.images);
+
+        //Muesto los productos relacionados.
+        mostrarRelacionados(product.relatedProducts);
+    }
+});
 }
-)
-
-
 
 //Función que muestra las imágenes en galería.
 function showImagesGallery(array){
@@ -31,16 +61,12 @@ function showImagesGallery(array){
     }
 }
 
-
-
-
 //Guardar fecha y hora.
 function getDate(){
   let date = new Date();
   let formatDate = date.getDate().toString().padStart(2,'0') + "/" + (date.getMonth() + 1).toString().padStart(2,'0') + "/" + date.getFullYear().toString() + "  " + date.getHours().toString().padStart(2,'0') + ":" + date.getMinutes().toString().padStart(2,'0') + ":" + date.getSeconds().toString().padStart(2,'0');
 return formatDate;
 }
-
 
 //Dibuja estrellas.
 function drawStars(stars){
@@ -55,8 +81,6 @@ function drawStars(stars){
   return html;
 }
 
-
-
 //Guardar comentario.
 function saveComment(){
   let comentario = {
@@ -68,7 +92,6 @@ function saveComment(){
   listacomments.push(comentario);
   showComment();
 }
-
 
 //Mostrar comentarios que se hagan.
 function showComment(){
@@ -82,8 +105,6 @@ function showComment(){
   }
   document.getElementById("comentarios").innerHTML = opinion;
 }
-
-
 
 //Muestro comentarios del JSON.
 function showComments() { 
@@ -114,56 +135,21 @@ function showComments() {
       showComment();
     }
     
-
-
-
-    //Muestro información del producto.
-function showProducts(){
+//Muestro productos relacionados.
+function mostrarRelacionados(lista){
+  let html = "";
+  for(let i = 0; i< lista.length; i++){
+    let relacionado = lista[i];
     
-  //Petición para traer los datos del producto.
-  getJSONData(PRODUCT_INFO_URL).then(function(resultObj){
-    if (resultObj.status === "ok")
-    {
-        product = resultObj.data;
-
-        let productNameHTML  = document.getElementById("productName");
-        let productDescriptionHTML = document.getElementById("productDescription");
-        let productCountHTML = document.getElementById("productCount");
-        let productCostHTML = document.getElementById("productCost");
-    
-        productNameHTML.innerHTML = product.name;
-        productDescriptionHTML.innerHTML = product.description;
-        productCountHTML.innerHTML = product.soldCount;
-        productCostHTML.innerHTML = product.cost;
-
-        //Muestro las imagenes en forma de galería.
-        showImagesGallery(product.images);
-    }
-     
-
-    function showRelacionados(){
-      getJSONData(PRODUCT_INFO_URL).then(function(resultObj){
-        if (resultObj.status === "ok")
-        {let prodRel = ``;
-        for (let i = 0; i < resultObj.relatedProducts.length; i++) {
-            prodRel += `
-            <div class="col-sm-4">
-                    <div class="card">
-                        <a class="card-link" href="#">
-                            <img class="card-img-top" src="${prods[info.relatedProducts[i]].imgSrc}" alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-title">${`prods`[info.relatedProducts[i]].name}</h5>
-                                <p class="card-text">${prods[info.relatedProducts[i]].description}</p>
-                                <p class="card-text">${prods[info.relatedProducts[i]].currency} ${prods[info.relatedProducts[i]].cost}</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            `
-        }
-
-
-        }
-    })
-    
-  }})}
+    html +=`
+<div class="card" style="width: 14rem;">
+  <img class="card-img-top" src="${listadeProductos[relacionado].imgSrc}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title"><strong>${listadeProductos[relacionado].name}</strong></h5>
+    <p class="card-text">${listadeProductos[relacionado].description}</p>
+    <a href="#" class="btn btn-primary">¡Ver más!</a>
+  </div>
+</div>`
+  }
+  document.getElementById("relacionados").innerHTML = html;
+  }

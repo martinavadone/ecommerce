@@ -33,7 +33,7 @@
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <a class="dropdown-item" href="cart.html">Ver carrito</a>
             <a class="dropdown-item" href="my-profile.html">Mi perfil</a>
-            <a class="dropdown-item" href="index.html">Cerrar sesión</a>
+            <a class="dropdown-item" onclick="cerrarSesion()" href="index.html">Cerrar sesión</a>
         </div>
         </div>
 
@@ -75,14 +75,16 @@
       <a type="button" class="btn btn-light btn-lg btn-block" href="products.html">Ver productos</a>
       <br>
     </div>
-
+<hr>
 
     <!-- Productos relacionados -->
-    <h1 style="text-align: center;">Productos Relacionados</h1><hr>
+    <h2 class="comment-card container text-center">Productos Relacionados</h2>
     <div  class="container-fluid d-flex justify-content-center">
-      <div class="row mt-5" id="relatedProd"></div>
+      <div class="row mt-5" id="relacionados"></div>
     </div><br>
     <hr>
+    
+
 
     
 <!--Parte de comentarios.-->

@@ -40,5 +40,8 @@ var getJSONData = function(url){
     });
 }
 
-
+//Función para eliminar el usuario del localStorage cuando cierro sesión.
+function cerrarSesion(){
+localStorage.removeItem('username');
+}
 
