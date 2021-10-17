@@ -12,7 +12,7 @@ function showCarrito(array) {
           <td><img src="${article.src}" class = "img-fluid" style ="max-width:90px!important"></td>
           <td class="align-middle">${article.name}</td>
           <td class="align-middle"><p id="precio${i}">${article.unitCost} ${article.currency}</p></td>
-          <td class="align-middle"><input type="number" min ="1" id="number${i}" value=${article.count} onchange="upProductSubTotal(${i})"></td>
+          <td class="align-middle"><input type="number" min ="1" id="number${i}" value=${article.count} onchange="updateProductSubTotal(${i})"></td>
           <td class="align-middle"><p id="subTotal${i}">${article.count * article.unitCost}</p></td>
           </tr>
           `      
@@ -23,7 +23,7 @@ function showCarrito(array) {
 }
 
 //Muestro el subtotal de cada producto y luego llamo a la función de costoTotal para mostrar todo el costo.
-function upProductSubTotal(i) {
+function updateProductSubTotal(i) {
     let cantidad = parseInt(document.getElementById("number"+i).value);
     let precioProduct = parseInt(document.getElementById("precio"+i).innerText);
 
