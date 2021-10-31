@@ -11,6 +11,7 @@
 
   <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <style>
     .bd-placeholder-img {
@@ -58,14 +59,41 @@
         
     </div>
   </nav>
-  <div class="container p-5">
-    <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
-      <h4 class="alert-heading">¡A trabajar! :)</h4>
-      <p>Esta sección corresponde a: Entrega 6 (Fecha de entrega: 31/10/2021).</p>
-      <hr>
-      <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
+
+
+<!--Perfil -->
+  <div class="container">
+
+    <div class="text-center p-4">
+      <h2 style="margin-top: 2vw;">Mi Perfil</h2>
     </div>
-  </div>
+            <div class="container rounded bg-white mt-5 mb-5">
+              <div class="row">
+                  <div class="col-md-3 border-right">
+                      <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img id="foto_perfil" class="rounded-circle mt-5" width="150px" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"></div>
+                  </div>
+                  <div class="col-md-5 border-right">
+                      <div class="p-3 py-5">
+                          <div class="d-flex justify-content-between align-items-center mb-3">
+                              <h4 class="text-right">Editar perfil</h4>
+                          </div>
+                          <div class="row mt-2">
+                              <div class="col-md-6"><label class="labels">Nombre</label><input style="text-align: left !important;" id="nombre_Perfil"  type="text" class="form-control" value=""></div>
+                              <div class="col-md-6"><label class="labels">Apellido</label><input style="text-align: left !important;" id="apellido_Perfil" type="text" class="form-control" value="" ></div>
+                          </div>
+                          <div class="row mt-3">
+                              <div class="col-md-12"><label class="labels">Segundo Nombre</label><input style="text-align: left !important;" id="nombreSegundo_Perfil" type="text" class="form-control" value=""></div>
+                              <div class="col-md-12"><label class="labels">Segundo Apellido</label><input style="text-align: left !important;" id="apellidoSegundo_Perfil" type="text" class="form-control"  value=""></div>
+                              <div class="col-md-12"><label class="labels">Teléfono</label><input style="text-align: left !important;" type="number" id="telefono" class="form-control"  value=""></div>
+                              <div class="col-md-12"><label class="labels">Edad</label><input style="text-align: left !important;" type="number" id="edad"  class="form-control"  value=""></div>
+                              <div class="col-md-12"><label class="labels">Email</label><input style="text-align: left !important;"  id="email" type="text" class="form-control" value=""></div>
+                          </div>
+                          <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button" onclick="guardarPerfil()">Guardar perfil</button></div>
+                      </div>
+                      
+                  </div>
+
+
   <footer class="text-muted bg-light">
     <div class="container">
       <p>Este sitio forma parte de Desarrollo Web - JAP - 2020</p>

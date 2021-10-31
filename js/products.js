@@ -58,24 +58,18 @@ function showProducts(array) {
             //buscador de productos
                 if (buscar == undefined || producto.name.toLowerCase().indexOf(buscar) != -1 || producto.description.toLowerCase().indexOf(buscar)!= -1) {
 
-                htmlContentToAppend += `
-            <a href="product-info.html" class="list-group-item list-group-item-action">
-                <div class="row">
-                    <div class="col-3">
-                        <img src="` + producto.imgSrc + `" alt="` + producto.description + `" class="img-thumbnail">
+                htmlContentToAppend += `   <div class="col-lg-4 col-md-6 col-sm-12" onclick="particularProd(` + `'` + producto.name + `'` + `)">
+                <a href="product-info.html" class="card mb-4 shadow-sm custom-card">
+                <img class="bd-placeholder-img card-img-top" src="${producto.imgSrc}" alt="${producto.description}">
+                    <div class="card-body">
+                        <h4 class="mb-1">${producto.name}</h4>
+                        <strong><p class="mb-1">${producto.currency} ${producto.cost}</p></strong>
+                        <p class="card-text">${producto.description}</p>
+                        <small class="text-muted">${producto.soldCount} artículos vendidos</small>
                     </div>
-                    <div class="col">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h4 class="mb-1">`+ producto.name + `</h4>
-                            <small class="text-muted">` + producto.soldCount + ` artículos</small>
-                        </div>
-                        <p class="mb-1">` + producto.description + `</p>
-                        <p class="mb-1 precio"> ` + producto.currency + ` ` + producto.cost + `</p>
-                    </div>
-            
-                </div>
-            </a>
-            `
+                </a>
+            </div>
+        `
             }
         }
         document.getElementById("productos-list-container").innerHTML = htmlContentToAppend;
