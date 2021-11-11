@@ -80,34 +80,23 @@
         <tbody id="carrito">
           </tbody>
         </table>
-        <p style="text-align:right"> <strong>Total: <span id="total"></spam></strong></p>   
       </div>
 
       <div class="container">
         <h3>Método de envío:</h3>
+        <br>
         <p><strong>Dirección:</strong></p>
         <input type="text" placeholder="calle">
         <input type="text" placeholder="número">
         <br><br>
         <p><strong>País:</strong></p>
         <input type="text" placeholder="país">
-        <br><br>
-        <p><strong>Tipo de envío:</strong></p>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-          <label style="margin-left: 8vw;" class="form-check-label" for="exampleRadios1"> Standard (12-15 días)</label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-          <label style="margin-left: 8vw;" class="form-check-label" for="exampleRadios2"> Express (5-8 días)</label>  
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-          <label style="margin-left: 8vw;" class="form-check-label" for="exampleRadios1"> Premium (2-5 días)</label>
-        </div>
-
+        <br>
+       
         <button type="button" style="margin-top: 2vw; border-radius: 5px; " class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> Forma de pago</button>
 
+
+        <!--Modal forma de envío.-->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -117,27 +106,34 @@
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <div class="modal-body">
-                Nombre completo:
-                <div class="input-group mb-3">
-                  <input type="text" class="form-control" placeholder="nombre y apellidos" aria-label="Username" aria-describedby="basic-addon1">
-                </div>
-              </div>
-              <div class="modal-body">
-                Tipo:
-                <div class="input-group mb-3">
-                  <select class="custom-select" id="inputGroupSelect01">
-                    <option selected>Elija una opción</option>
-                    <option value="1">Tarjeta de Crédito</option>
-                    <option value="2">Tarjeta de Débito</option>
-                    <option value="3">Efectivo</option>
-                  </select>
-                </div>
-              </div>
 
               <div class="modal-body">
-                Fecha: <input  type="date" name="fecha">
+
+                <label for="metPago"><b>Método de pago:</b></label>
+                
+                <select onchange="cambiarMétodo();" class="form-control" id="métodoPago">
+                  <option selected value="1">Transferencia bancaria</option>
+                  <option value="2">Tarjeta de crédito</option>
+                </select>
+  
+                <div id="noCuenta" class="mt-2 float-left">
+                  <label>Número de cuenta:</label>
+                  <input class="form-control" type="text" placeholder="Número de cuenta">
+                </div>
+  
+                <div hidden id="noTarjeta" class="mt-2 float-left">
+                  <label>Número de tarjeta:</label>
+                  <input class="form-control" type="text" placeholder="Número de tarjeta">
+                  <label>Código de seguridad:</label>
+                  <input class="form-control" type="number" placeholder="CVC">
+                  <label>Vencimiento:</label>
+                  <div class="input-group mb-3" >
+                  <input  type="date" name="fecha">
+                  </div>       
+                </div>
+                
               </div>
+
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                 <a href="cart.html" type="button" class="btn btn-primary">Guardar cambios</a>
@@ -145,12 +141,42 @@
             </div>
           </div>
         </div>
-        <div> <a class="boton" style="margin-left: 0vw;
-          margin-top: 2vw; text-align: center;" type="button" href="cart.html">Realizar envío</a>
-        </div>
         <br><br>
        
-      </div>     
+
+
+
+<!--Resumen de facturación con costo total.-->
+        <div>
+          <h3>Resumen de facturación</h3>
+        </div> 
+        <br>
+        <p class="m-auto" id="subtotal">Subtotal:  <span id="total"></span></p>
+        <br>
+        <p><strong><i>Tipo de envío:</i></strong></p>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+              <label class="form-check-label"  for="exampleRadios1"> Standard (12-15 días)</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+              <label class="form-check-label"  for="exampleRadios2"> Express (5-8 días)</label>  
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3">
+              <label class="form-check-label"  for="exampleRadios3"> Premium (2-5 días)</label>
+            </div> 
+        <div>  
+          <br>
+           <p class="m-auto" id="costEnvio">Costo de envío: <span id="envio"></span></p>
+           <br>
+            <h4 class="m-auto" id="total"><strong></strong>Total:</strong> <span id="totalconenvio"></span></h4> 
+      </div>   
+                              
+       <div> 
+         <a class="boton" style="margin-left: 0vw; margin-top: 2vw; text-align: center;" type="button" href="cart.html">Realizar envío</a>
+       </div>
+        <br><br>                 
 
       <footer class="text-muted bg-light">
         <div class="container">

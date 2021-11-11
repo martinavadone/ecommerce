@@ -37,12 +37,32 @@ function updateProductSubTotal(i) {
 
 //Obtengo el costo total a través de la suma de los subtotales de cada artículo.
 function costoTotal(){
-    let sumaTotal = 0;
+    sumaTotal = 0;
   for(let i = 0; i < productosCarrito.articles.length ;i++){
     sumaTotal += parseFloat(document.getElementById(`subTotal${i}`).innerHTML);
   }
 
   document.getElementById('total').innerHTML = "$" + " " + sumaTotal; 
+  calcTotal()
+}
+
+//Obtengo el costo total con el envío.
+function calcTotal() {
+  let premium = document.getElementById("exampleRadios1").checked
+  let express = document.getElementById("exampleRadios2").checked
+  let standard = document.getElementById("exampleRadios3").checked
+  let costoEnvio;
+  if (premium) {
+    costoEnvio = Math.round(sumaTotal * 15) / 100
+  }
+  if (express) {
+    costoEnvio = Math.round(sumaTotal * 7) / 100
+  }
+  if (standard) {
+    costoEnvio = Math.round(sumaTotal * 5) / 100
+  }
+  document.getElementById('totalconenvio').innerHTML = "$ " + (sumaTotal + costoEnvio);
+  document.getElementById('envio').innerHTML = "$ " + costoEnvio;
 
 }
 
@@ -53,12 +73,40 @@ document.addEventListener("DOMContentLoaded", function(e){
             productosCarrito = resultado.data;
             showCarrito(productosCarrito.articles);
             costoTotal();
+            
         }
-  
+
     })
+    
+    let premium = document.getElementById('exampleRadios1')
+    let express =document.getElementById('exampleRadios2')
+    let standard = document.getElementById('exampleRadios3')
+    premium.addEventListener("click",function(){
+      calcTotal()
+    })
+    express.addEventListener("click",function(){
+      calcTotal()
+    })
+    standard.addEventListener("click",function(){
+      calcTotal()
+    })
+
 });
 
-
+//Función para elegir el método de pago y que cambie los campos asociados a cada uno.
+function cambiarMétodo(){
+  let métodoElegido = document.getElementById("métodoPago").value;
+  let divTarjeta = document.getElementById("noTarjeta");
+  let divCuenta = document.getElementById("noCuenta");
+  if(métodoElegido == 1){
+      divTarjeta.setAttribute("hidden", false);
+      divCuenta.removeAttribute("hidden");
+  }
+  if(métodoElegido == 2){
+      divCuenta.setAttribute("hidden", false);
+      divTarjeta.removeAttribute("hidden");
+  }
+}
 
 
 
