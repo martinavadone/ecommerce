@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", function(e){
     standard.addEventListener("click",function(){
       calcTotal()
     })
-
+    
 });
 
 //Función para elegir el método de pago y que cambie los campos asociados a cada uno.
@@ -108,6 +108,64 @@ function cambiarMétodo(){
   }
 }
 
+ //Función para validar los campos la dirección de envío.
+ function validarEnvío(){
+   let calle = document.getElementById("calle").value;
+   let numero = document.getElementById("numero").value;
+   let pais = document.getElementById("pais").value;
+   if(calle != "" && numero != "" && pais != ""){
+       return true;
+   }else{
+      return false;
+   }
+ }
+
+ //
+ function validarPago(){
+   let opc = document.getElementById("métodoPago").value;
+   let resultadoPago;
+   if(opc == 1){ //Chequear transferencia bancaria.
+       if(document.getElementById("nroCta").value != ""){
+           resultadoPago = true;
+       } else {
+           resultadoPago = false;
+       }    
+   } else { //Chequear tarjeta de crédito.
+       if(document.getElementById("nroTarjeta").value != "" &&
+       document.getElementById("cvc").value != "" &&
+       document.getElementById("vencimiento").value != ""){
+           resultadoPago = true;
+       }else{
+       resultadoPago = false;
+       }
+   }
+   return resultadoPago;
+ }
+ 
+ function finalizarCompra(){
+  document.getElementById("alerta").setAttribute("hidden", true);
+  document.getElementById("alertaEnvio").setAttribute("hidden", true);
+  document.getElementById("alertaPago").setAttribute("hidden", true);
+  let val1 = validarPago();
+  let val2 = validarEnvío();
+
+  if(val1 && val2){
+     document.getElementById("exito").removeAttribute("hidden", true);
+     return true;
+  }
+  else{
+      document.getElementById("alerta").removeAttribute("hidden");
+  if(!val1){
+      document.getElementById("alertaPago").removeAttribute("hidden");
+      }    
+  if(!val2){
+          document.getElementById("alertaEnvio").removeAttribute("hidden");
+      }  
+     return false;
+ }
+}
+ 
+  
 
 
 
